@@ -1,16 +1,33 @@
-# This is a sample Python script.
+import numpy as np
+from Agent import Agent
+from Enviroment import Enviroment
+env = Enviroment()
+agent = Agent()
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+max_Score = 0
+score_list = list()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+for episode in range(2000):
+    print("Episode: ", episode+1)
+    print("Max Score", max_Score)
+    state, done = env.reset()
+    Score = 0
 
+    while not done:
+        action = agent.select_action(state)
+        state_, reward, done, time = env.step(action)
+        agent.remember(state, action, state_, reward, done)
+        state = state_
+        Score += reward
+        agent.learn()
+        agent.target_train()
+    score_list.append(Score)
+    if Score >= max_Score:
+        max_Score = Score
+    print(state_)
+    print("Score: ", Score)
+    print("Time:", time)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    out = np.array(score_list).transpose()
+    np.savetxt('res.txt', out)
