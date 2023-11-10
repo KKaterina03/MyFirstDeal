@@ -2,3 +2,5 @@
 1) Цепи Маркова и Пайтон — разбираемся в теории и собираем генератор текстов
 https://habr.com/ru/articles/510798/
 
+2) https://en.wikipedia.org/wiki/Failure_rate
+
