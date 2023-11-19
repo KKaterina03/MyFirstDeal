@@ -18,7 +18,7 @@ def failure_rates_func(t):
     lam_matrx[3,3] = -(lam_matrx[3][0] + lam_matrx[3][1] + lam_matrx[3][2])
     return lam_matrx
 
-
+print(failure_rates_func(0))
 def reward_func(t):
     reward_matrx = np.zeros((4, 4))
     reward_matrx[0,0] = 300
