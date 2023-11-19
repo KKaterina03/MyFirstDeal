@@ -26,33 +26,40 @@ def reward_func(t):
     return reward_matrx
 
 
-V = np.zeros(4)
-dV = np.zeros(4)
-time = 0
-h = 0.001;
-res = list()
-timeL = list()
-while time < 5:
-    res.append(np.mean(V))
-    timeL.append(time)
-    r = reward_func(time)
-    a = failure_rates_func(time)
+def equals(time_, arg):
+    r = reward_func(time_)
+    a = failure_rates_func(time_)
+    dV = np.zeros(4)
     for i in range(4):
         A = 0
         B = 0
         for j in range(4):
-            A += a[i][j]*r[i][j]
-            B += a[i][j]*V[j]
+            if j != i:
+                A += a[i][j]*r[i][j]
+            B += a[i][j]*arg
         dV[i] = r[i][i] + A + B
-        print(dV)
-    V += dV * h
+
+    return dV
+
+
+V = np.zeros(4)
+time = 0
+h = 0.001;
+res = list()
+timeL = list()
+
+
+
+while time < 5:
+    k1 = equals(time, V)
+    k2 = equals(time+h/2, V + k1* h/2)
+    k3 = equals(time + h / 2, V + k2 * h / 2)
+    k4 = equals(time + h, V + k3 * h)
+
+    V += (k1+k2+k3+k4)*h/6
     time += h
+    res.append(V.mean())
+    timeL.append(time)
 
-plt.plot(timeL,res)
+plt.plot(timeL, res)
 plt.show()
-
-
-
-
-
-
