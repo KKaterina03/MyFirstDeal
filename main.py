@@ -15,7 +15,7 @@ def failure_rates_func(t):
     lam_matrx[0,0] = -lam_matrx[0][3]
     lam_matrx[1,1] = -lam_matrx[1][3]
     lam_matrx[2,2] = -lam_matrx[2][3]
-    lam_matrx[3,3] = -(lam_matrx[3][0] +  lam_matrx[3][1] + lam_matrx[3][2])
+    lam_matrx[3,3] = -(lam_matrx[3][0] + lam_matrx[3][1] + lam_matrx[3][2])
     return lam_matrx
 
 
@@ -36,7 +36,8 @@ def equals(time_, arg):
         for j in range(4):
             if j != i:
                 A += a[i][j]*r[i][j]
-            B += a[i][j]*arg
+            B += a[i][j]*arg[j]
+
         dV[i] = r[i][i] + A + B
 
     return dV
