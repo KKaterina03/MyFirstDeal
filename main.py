@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-
 def failure_rates_func(t):
     lam_matrx = np.zeros((4, 4))
     lam_matrx[3,0] = 2.63
