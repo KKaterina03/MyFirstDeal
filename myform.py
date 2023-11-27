@@ -21,7 +21,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setGeometry(QtCore.QRect(20, 40, 321, 61))
+        self.groupBox.setGeometry(QtCore.QRect(20, 40, 421, 81))
         self.groupBox.setStyleSheet("border: 1px solid;\n"
 "border-color:  black;\n"
 "color: black;;\n"
@@ -46,11 +46,18 @@ class Ui_MainWindow(object):
 "border-color:  rgb(242, 141, 24);\n"
 "")
         self.radioButton.setObjectName("radioButton")
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.groupBox)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 140, 321, 80))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
         self.radioButton.raise_()
         self.radioButton_2.raise_()
         self.radioButton_3.raise_()
+        self.verticalLayoutWidget.raise_()
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 180, 341, 169))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 290, 441, 171))
         self.tableWidget.setStyleSheet("QHeaderView::section \n"
 "{\n"
 "    background-color:#30d5c8;\n"
@@ -106,21 +113,21 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setItem(2, 3, item)
         self.widget = PlotWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(390, 30, 711, 281))
+        self.widget.setGeometry(QtCore.QRect(530, 30, 551, 281))
         self.widget.setStyleSheet("border: 1px solid;\n"
 "border-color:  white;\n"
 "color: white;\n"
 "background-color: rgb(255, 255, 255);")
         self.widget.setObjectName("widget")
         self.widget_2 = PlotWidget(self.centralwidget)
-        self.widget_2.setGeometry(QtCore.QRect(390, 380, 711, 281))
+        self.widget_2.setGeometry(QtCore.QRect(530, 380, 551, 281))
         self.widget_2.setStyleSheet("border: 1px solid;\n"
 "border-color:  white;\n"
 "color: white;\n"
 "background-color: rgb(255, 255, 255);")
         self.widget_2.setObjectName("widget_2")
         self.CalcButton = QtWidgets.QPushButton(self.centralwidget)
-        self.CalcButton.setGeometry(QtCore.QRect(20, 410, 151, 41))
+        self.CalcButton.setGeometry(QtCore.QRect(20, 560, 151, 41))
         self.CalcButton.setStyleSheet("QPushButton{\n"
 "    border-radius: 15px;\n"
 "    color: white; \n"
@@ -135,7 +142,7 @@ class Ui_MainWindow(object):
 "")
         self.CalcButton.setObjectName("CalcButton")
         self.AddButton = QtWidgets.QPushButton(self.centralwidget)
-        self.AddButton.setGeometry(QtCore.QRect(20, 360, 321, 41))
+        self.AddButton.setGeometry(QtCore.QRect(20, 480, 321, 41))
         self.AddButton.setStyleSheet("QPushButton{\n"
 "    border-radius: 15px;\n"
 "    color: white; \n"
@@ -151,12 +158,12 @@ class Ui_MainWindow(object):
 "")
         self.AddButton.setObjectName("AddButton")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(0, 0, 381, 721))
+        self.label_2.setGeometry(QtCore.QRect(0, 0, 531, 721))
         self.label_2.setStyleSheet("background-color:  rgb(253,244,227);")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
-        self.ExitButton.setGeometry(QtCore.QRect(190, 410, 151, 41))
+        self.ExitButton.setGeometry(QtCore.QRect(190, 560, 151, 41))
         self.ExitButton.setStyleSheet("QPushButton{\n"
 "    border-radius: 15px;\n"
 "    color: white; \n"
@@ -173,11 +180,11 @@ class Ui_MainWindow(object):
         self.ExitButton.setObjectName("ExitButton")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(370, -10, 751, 811))
-        self.label_3.setStyleSheet("background-color: rgb(220,220,220);")
+        self.label_3.setStyleSheet("background-color:  rgb(253,244,227);")
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(140, 140, 77, 22))
+        self.lineEdit.setGeometry(QtCore.QRect(140, 136, 77, 22))
         self.lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "\n"
 "")
@@ -186,6 +193,18 @@ class Ui_MainWindow(object):
         self.label.setGeometry(QtCore.QRect(20, 130, 111, 31))
         self.label.setStyleSheet("background-color:  rgb(253,244,227);")
         self.label.setObjectName("label")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(30, 180, 181, 31))
+        self.label_4.setStyleSheet("background-color:  rgb(253,244,227);")
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(30, 210, 181, 31))
+        self.label_5.setStyleSheet("background-color:  rgb(253,244,227);")
+        self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(30, 240, 181, 31))
+        self.label_6.setStyleSheet("background-color:  rgb(253,244,227);")
+        self.label_6.setObjectName("label_6")
         self.label_3.raise_()
         self.label_2.raise_()
         self.groupBox.raise_()
@@ -197,6 +216,9 @@ class Ui_MainWindow(object):
         self.ExitButton.raise_()
         self.lineEdit.raise_()
         self.label.raise_()
+        self.label_4.raise_()
+        self.label_5.raise_()
+        self.label_6.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -216,7 +238,7 @@ class Ui_MainWindow(object):
         item = self.tableWidget.verticalHeaderItem(2)
         item.setText(_translate("MainWindow", "3"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Сосотяние"))
+        item.setText(_translate("MainWindow", "Состояние"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "λ"))
         item = self.tableWidget.horizontalHeaderItem(2)
@@ -254,4 +276,7 @@ class Ui_MainWindow(object):
         self.AddButton.setText(_translate("MainWindow", "Добавить состояние"))
         self.ExitButton.setText(_translate("MainWindow", "Выход"))
         self.label.setText(_translate("MainWindow", "Постоянный спрос"))
+        self.label_4.setText(_translate("MainWindow", "λ - "))
+        self.label_5.setText(_translate("MainWindow", "μ - "))
+        self.label_6.setText(_translate("MainWindow", "g - "))
 from pyqtgraph import PlotWidget
