@@ -9,11 +9,16 @@ class MyWindow(QtWidgets.QMainWindow):
         super(MyWindow,self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.prog)
-    def prog(self):
-        text = self.ui.lineEdit.text()
-        self.ui.label.setText("Ага, " + text)
-
+        self.setWindowFlags(QtCore.Qt.Window | QtCore.Qt.FramelessWindowHint)
+        self.ui.widget.setBackground('w')
+        self.ui.widget.showGrid(x=True, y=True)
+        self.ui.widget_2.setBackground('w')
+        self.ui.widget_2.showGrid(x=True, y=True)
+        self.ui.AddButton.clicked.connect(self.add_line)
+        self.ui.ExitButton.clicked.connect(self.close)
+    def add_line(self):
+        current_row_count = self.ui.tableWidget.rowCount()
+        self.ui.tableWidget.insertRow(current_row_count)
 
 app = QtWidgets.QApplication([])
 application = MyWindow()
