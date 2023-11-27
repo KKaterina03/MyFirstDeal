@@ -1,6 +1,4 @@
 import sys
-import numpy as np
-import pyqtgraph as pg
 from PyQt5 import QtWidgets, QtCore
 from myform import Ui_MainWindow
 from core import calcCore
