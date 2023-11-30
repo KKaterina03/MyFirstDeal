@@ -128,7 +128,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(255, 255, 255);")
         self.widget_2.setObjectName("widget_2")
         self.CalcButton = QtWidgets.QPushButton(self.centralwidget)
-        self.CalcButton.setGeometry(QtCore.QRect(20, 560, 151, 41))
+        self.CalcButton.setGeometry(QtCore.QRect(10, 520, 211, 41))
         self.CalcButton.setStyleSheet("QPushButton{\n"
 "    border-radius: 15px;\n"
 "    color: white; \n"
@@ -143,7 +143,7 @@ class Ui_MainWindow(object):
 "")
         self.CalcButton.setObjectName("CalcButton")
         self.AddButton = QtWidgets.QPushButton(self.centralwidget)
-        self.AddButton.setGeometry(QtCore.QRect(20, 480, 321, 41))
+        self.AddButton.setGeometry(QtCore.QRect(10, 470, 441, 41))
         self.AddButton.setStyleSheet("QPushButton{\n"
 "    border-radius: 15px;\n"
 "    color: white; \n"
@@ -164,7 +164,7 @@ class Ui_MainWindow(object):
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
-        self.ExitButton.setGeometry(QtCore.QRect(190, 560, 151, 41))
+        self.ExitButton.setGeometry(QtCore.QRect(230, 520, 221, 41))
         self.ExitButton.setStyleSheet("QPushButton{\n"
 "    border-radius: 15px;\n"
 "    color: white; \n"
