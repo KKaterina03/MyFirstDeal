@@ -16,13 +16,18 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.AddButton.clicked.connect(self.add_line)
         self.ui.CalcButton.clicked.connect(self.read_data)
         self.ui.ExitButton.clicked.connect(self.close)
-        self.core = calcCore()
+
     def add_line(self):
         current_row_count = self.ui.tableWidget.rowCount()
         self.ui.tableWidget.insertRow(current_row_count)
     def read_data(self):
         demand = float(self.ui.lineEdit.text())
         current_row_count = self.ui.tableWidget.rowCount()
+        mode = 1
+        if self.ui.radioButton_2.isChecked() == True:
+            mode = 2
+        if self.ui.radioButton_3.isChecked() ==True:
+            mode =3
         lam_list = list()
         mu_list = list()
         g_list = list()
@@ -33,8 +38,8 @@ class MyWindow(QtWidgets.QMainWindow):
             mu_list.append(float(mu))
             lam = self.ui.tableWidget.item(i, 1).text()
             lam_list.append(float(lam))
-            mode = 1
-        self.core.master(lam_list, mu_list, g_list, demand, mode)
+
+        core = calcCore(lam_list, mu_list, g_list, demand, mode)
 
 app = QtWidgets.QApplication([])
 application = MyWindow()

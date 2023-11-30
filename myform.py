@@ -45,6 +45,7 @@ class Ui_MainWindow(object):
         self.radioButton.setStyleSheet("border: none;\n"
 "border-color:  rgb(242, 141, 24);\n"
 "")
+        self.radioButton.setChecked(True)
         self.radioButton.setObjectName("radioButton")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.groupBox)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 140, 321, 80))
@@ -275,6 +276,7 @@ class Ui_MainWindow(object):
         self.CalcButton.setText(_translate("MainWindow", "Рассчёт"))
         self.AddButton.setText(_translate("MainWindow", "Добавить состояние"))
         self.ExitButton.setText(_translate("MainWindow", "Выход"))
+        self.lineEdit.setText(_translate("MainWindow", "5"))
         self.label.setText(_translate("MainWindow", "Постоянный спрос"))
         self.label_4.setText(_translate("MainWindow", "λ - "))
         self.label_5.setText(_translate("MainWindow", "μ - "))
