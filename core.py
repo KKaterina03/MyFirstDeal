@@ -12,6 +12,6 @@ class calcCore():
         print(states_count)
         self.transistionMatrix = np.zeros((states_count, states_count))
     def draw_plot(self):
-
-
+        pass
     def solve(self):
+        pass
