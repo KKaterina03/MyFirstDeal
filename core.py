@@ -15,7 +15,9 @@ class calcCore():
         Matrix = np.zeros((9, 9))
 
 
-    def draw_plot(self):
-        pass
     def solve(self):
-        pass
+        x = np.linspace(0,100,1000)
+        y = 0.1*x+np.sin(x)
+        y1 = 10*np.exp(-0.05*x)*(np.exp(0.05*x)-1)
+
+        return x, y, y1

@@ -2,7 +2,7 @@ import sys
 from PyQt5 import QtWidgets, QtCore
 from myform import Ui_MainWindow
 from core import calcCore
-
+import pyqtgraph as pg
 class MyWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MyWindow,self).__init__()
@@ -40,7 +40,10 @@ class MyWindow(QtWidgets.QMainWindow):
             lam_list.append(float(lam))
 
         core = calcCore(lam_list, mu_list, g_list, demand, mode)
-
+        x,y,y2 = core.solve()
+        pen = pg.mkPen(color=(0, 0, 0), width=2)
+        self.ui.widget.plotItem.plot(x, y, pen=pen)
+        self.ui.widget_2.plotItem.plot(x, y2, pen=pen)
 app = QtWidgets.QApplication([])
 application = MyWindow()
 application.show()
