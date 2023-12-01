@@ -10,7 +10,11 @@ class calcCore():
         print(mode)
         states_count = len(l1)
         print(states_count)
-        self.transistionMatrix = np.zeros((states_count, states_count))
+
+    def gen_transition_matrix(self, l1, l2):
+        Matrix = np.zeros((9, 9))
+
+
     def draw_plot(self):
         pass
     def solve(self):
