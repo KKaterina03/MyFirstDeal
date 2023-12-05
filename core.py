@@ -65,7 +65,7 @@ class calcCore():
             k3 = self.equals(V + k2 * h / 2)
             k4 = self.equals(V + k3 * h)
 
-            V += (k1 + k2 + k3 + k4) * h / 6
+            V += (k1 + 2*k2 + 2*k3 + k4) * h / 6
             time += h
             res.append(V.mean())
             timeL.append(time)
