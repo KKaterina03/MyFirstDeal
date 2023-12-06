@@ -2,16 +2,15 @@ import numpy as np
 
 class calcCore():
 
-    def __init__(self, RM, TM):
+    def __init__(self, RM, RMI, TM):
         self.rang_matrix = RM
         self.transition_matrix = TM
         self.N = len(RM)
-        self.rang_matrix_inv = np.zeros((self.N,self.N))
+        self.rang_matrix_inv = RMI
         for i in range(len(self.transition_matrix)):
             self.transition_matrix[i,i] = -sum(self.transition_matrix[i])
 
-        for i  in range(len(self.rang_matrix_inv)):
-            self.rang_matrix_inv[i,i] = 1 - self.rang_matrix[i,i]
+
 
 
     def equals(self,  arg):
@@ -43,7 +42,6 @@ class calcCore():
                 B += a[i][j] * arg[j]
 
             dV[i] = r[i][i] + A + B
-
         return dV
 
 
@@ -64,8 +62,9 @@ class calcCore():
             k4 = self.equals(V + k3 * h)
 
             V += (k1 + 2*k2 + 2*k3 + k4) * h / 6
+
             time += h
-            res.append(V.mean())
+            res.append(V[0])
             timeL.append(time)
 
         V = np.zeros(self.N)
@@ -79,7 +78,7 @@ class calcCore():
 
             V += (k1 + 2*k2 + 2*k3 + k4) * h / 6
             time += h
-            res2.append(V.mean())
+            res2.append(sum(V[2:-1]))
             timeL.append(time)
 
         return timeL, res, res2

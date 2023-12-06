@@ -58,8 +58,24 @@ class MyWindow(QtWidgets.QMainWindow):
         t_count =   self.ui.tableWidget_2.rowCount()
         rang_matrix = np.zeros((states, states))
         transition_matrix = np.zeros((states, states))
+        rang_matrix_inv = np.zeros((states, states))
+
         for i in range(states):
-            rang_matrix[i,i] =  (demand - float(self.ui.tableWidget.item(i, 1).text())) > 0
+            for j in range(states):
+                i = int(self.ui.tableWidget.item(i, 0).text())
+                j = int(self.ui.tableWidget.item(j, 0).text())
+
+                value_1 = demand - float(self.ui.tableWidget.item(i, 1).text())
+                value_2 = demand - float(self.ui.tableWidget.item(j, 1).text())
+
+                if (value_1 > 0) and (value_2 <= 0):
+                    rang_matrix_inv[i,j] = 1
+
+
+
+        for i in range(states):
+            #Функция Хевисайда
+            rang_matrix[i,i] = (demand - float(self.ui.tableWidget.item(i, 1).text())) > 0
 
         for n in range(t_count):
             i = int(self.ui.tableWidget_2.item(n, 0).text())
@@ -70,8 +86,8 @@ class MyWindow(QtWidgets.QMainWindow):
             transition_matrix[i,j] = lam
             transition_matrix[j, i] = mu
 
-
-        core = calcCore(rang_matrix, transition_matrix)
+        print(rang_matrix_inv)
+        core = calcCore(rang_matrix, rang_matrix_inv, transition_matrix)
         
         t, res, res2 = core.solve()
         pen = pg.mkPen(color=(0, 0, 0), width=2)
