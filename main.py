@@ -59,7 +59,8 @@ class MyWindow(QtWidgets.QMainWindow):
         rang_matrix = np.zeros((states, states))
         transition_matrix = np.zeros((states, states))
         for i in range(states):
-            rang_matrix[i,i] =  (float(self.ui.tableWidget.item(i, 1).text()) - demand) > 0
+            #Функция Хевисайда
+            rang_matrix[i,i] = (demand - float(self.ui.tableWidget.item(i, 1).text())) > 0
 
         for n in range(t_count):
             i = int(self.ui.tableWidget_2.item(n, 0).text())
