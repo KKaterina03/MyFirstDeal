@@ -1,7 +1,7 @@
 import sys
 import csv
 import numpy as np
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from myform import Ui_MainWindow
 from core import calcCore
 import pyqtgraph as pg
@@ -16,6 +16,20 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.widget.showGrid(x=True, y=True)
         self.ui.widget_2.setBackground('w')
         self.ui.widget_2.showGrid(x=True, y=True)
+
+        header = self.ui.tableWidget_2.horizontalHeader()
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+
+
+        header2 = self.ui.tableWidget.horizontalHeader()
+        header2.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        header2.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        header2.setStretchLastSection(True)
+
+
         self.ui.AddButton.clicked.connect(self.add_line)
         self.ui.CalcButton.clicked.connect(self.read_data)
         self.ui.ExitButton.clicked.connect(self.close)
