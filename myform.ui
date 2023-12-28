@@ -33,7 +33,11 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QHeaderView::section 
+     <string notr="true">QTableCornerButton::section {
+    background-color: #30d5c8;
+}
+
+QHeaderView::section 
 {
     background-color:#30d5c8;
     color: black;
@@ -297,7 +301,11 @@ QPushButton:hover{
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QHeaderView::section 
+     <string notr="true">QTableCornerButton::section {
+    background-color: #30d5c8;
+}
+
+QHeaderView::section 
 {
     background-color:#30d5c8;
     color: black;

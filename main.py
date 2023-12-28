@@ -34,6 +34,10 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.widget_2.setBackground('w')
         self.ui.widget_2.showGrid(x=True, y=True)
 
+        self.ui.tableWidget_2.verticalHeader().setVisible(False)
+        self.ui.tableWidget.verticalHeader().setVisible(False)
+
+
         #Вот это всё настройки каддой колонки в кажодй таблице
         header = self.ui.tableWidget_2.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)

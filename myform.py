@@ -22,7 +22,11 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(580, 120, 281, 331))
-        self.tableWidget.setStyleSheet("QHeaderView::section \n"
+        self.tableWidget.setStyleSheet("QTableCornerButton::section {\n"
+"    background-color: #30d5c8;\n"
+"}\n"
+"\n"
+"QHeaderView::section \n"
 "{\n"
 "    background-color:#30d5c8;\n"
 "    color: black;\n"
@@ -137,7 +141,11 @@ class Ui_MainWindow(object):
         self.label_6.setObjectName("label_6")
         self.tableWidget_2 = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget_2.setGeometry(QtCore.QRect(10, 10, 541, 671))
-        self.tableWidget_2.setStyleSheet("QHeaderView::section \n"
+        self.tableWidget_2.setStyleSheet("QTableCornerButton::section {\n"
+"    background-color: #30d5c8;\n"
+"}\n"
+"\n"
+"QHeaderView::section \n"
 "{\n"
 "    background-color:#30d5c8;\n"
 "    color: black;\n"
