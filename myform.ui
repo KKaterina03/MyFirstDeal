@@ -98,7 +98,7 @@ background-color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>620</y>
+      <y>590</y>
       <width>321</width>
       <height>41</height>
      </rect>
@@ -121,34 +121,6 @@ QPushButton:hover{
      <string>Рассчёт</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="AddButton">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>570</y>
-      <width>321</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
-	border-radius: 15px;
-    color: white; 
-    background:  #30d5c8;
-}
-QPushButton:hover{
-	border-radius: 15px;
-	color: black; 
-    background: white;
-	
-}
-
-</string>
-    </property>
-    <property name="text">
-     <string>Добавить состояние</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
@@ -169,7 +141,7 @@ QPushButton:hover{
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>670</y>
+      <y>640</y>
       <width>321</width>
       <height>41</height>
      </rect>
@@ -372,13 +344,68 @@ background-color:   rgb(253,244,227);
      <string>График 2</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="Nazad">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>700</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border-radius: 15px;
+    color: white; 
+    background:  #30d5c8;
+}
+QPushButton:hover{
+	border-radius: 15px;
+	color: black; 
+    background: white;
+	
+}
+
+</string>
+    </property>
+    <property name="text">
+     <string>Назад</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Vpered">
+    <property name="geometry">
+     <rect>
+      <x>1210</x>
+      <y>700</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border-radius: 15px;
+    color: white; 
+    background:  #30d5c8;
+}
+QPushButton:hover{
+	border-radius: 15px;
+	color: black; 
+    background: white;
+	
+}
+
+</string>
+    </property>
+    <property name="text">
+     <string>Вперед</string>
+    </property>
+   </widget>
    <zorder>label_3</zorder>
    <zorder>label_2</zorder>
    <zorder>tableWidget</zorder>
    <zorder>widget</zorder>
    <zorder>widget_2</zorder>
    <zorder>CalcButton</zorder>
-   <zorder>AddButton</zorder>
    <zorder>ExitButton</zorder>
    <zorder>lineEdit</zorder>
    <zorder>label</zorder>
@@ -388,6 +415,8 @@ background-color:   rgb(253,244,227);
    <zorder>tableWidget_2</zorder>
    <zorder>label_7</zorder>
    <zorder>label_8</zorder>
+   <zorder>Nazad</zorder>
+   <zorder>Vpered</zorder>
   </widget>
  </widget>
  <customwidgets>
