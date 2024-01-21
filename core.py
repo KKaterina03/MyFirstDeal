@@ -3,18 +3,18 @@ import numpy as np
 
 class calcCore():
     # Мы скормили ему матрицы в главном файле вот они тут выглядят как RM RMI TM
-    def __init__(self, RM, RMI, TM):
+    def __init__(self, RM, RM2, RM3, RM4, TM):
         #Они будут как атрибуты объектра (хранится внутри решателя проще говоря)
         self.rang_matrix = RM
         self.transition_matrix = TM
-        self.rang_matrix_inv = RMI
+        self.rang_matrix_2 = RM2
+        self.rang_matrix_3 = RM3
+        self.rang_matrix_4 = RM4
         #Размер нащих матриц а они все N*N | N = количество стостоянии
         self.N = len(RM)
         #Суммируем стрки по главной диагоняли в матрице переходов
         for i in range(len(self.transition_matrix)):
             self.transition_matrix[i,i] = -sum(self.transition_matrix[i])
-
-
 
     #Система диф уравнении которые прописаны точь в точь как в статье
     def equals(self,  arg):
@@ -35,7 +35,7 @@ class calcCore():
 
     # Система диф уравнении но уже для другой матрицы переходов
     def equals2(self,  arg):
-        r = self.rang_matrix_inv
+        r = self.rang_matrix_2
         a = self.transition_matrix
         dV = np.zeros(self.N)
         for i in range(self.N):
@@ -48,6 +48,22 @@ class calcCore():
 
             dV[i] = r[i][i] + A + B
         return dV
+
+    def equals3(self, arg):
+        r = self.rang_matrix_3
+        a = self.transition_matrix
+        dV = np.zeros(self.N)
+        for i in range(self.N):
+            A = 0
+            B = 0
+            for j in range(self.N):
+                if j != i:
+                    A += a[i][j] * r[i][j]
+                B += a[i][j] * arg[j]
+
+            dV[i] = r[i][i] + A + B
+        return dV
+
 
     #Интегратор
     def solve(self):

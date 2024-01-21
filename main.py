@@ -25,7 +25,7 @@ class MyWindow(QtWidgets.QMainWindow):
         #Загрузка таблицы (функция описана ниже)
         self.load_table()
         #Убирание рамок
-        self.setWindowFlags(QtCore.Qt.Window | QtCore.Qt.FramelessWindowHint)
+        #self.setWindowFlags(QtCore.Qt.Window | QtCore.Qt.FramelessWindowHint)
         #Белый фон графика 1
         self.ui.widget.setBackground('w')
         #Сетка на графике 1
@@ -121,8 +121,13 @@ class MyWindow(QtWidgets.QMainWindow):
         rang_matrix = np.zeros((states, states))
         #аьрица переходов аналогично
         transition_matrix = np.zeros((states, states))
-        #Вторая матрица вознагражении для второго расчёта
-        rang_matrix_inv = np.zeros((states, states))
+        #Третья матрица вознагражении
+        rang_matrix_3 = np.zeros((states, states))
+        #Вторая матрица
+        rang_matrix_2 = np.zeros((states,states))
+        #Четвёртая матрица
+        rang_matrix_4 = np.zeros((states, states))
+
 
         #Таак тут пробегаемся по таблице и смотрим овзнаграждение за будущие переходы
         for i in range(states):
@@ -135,14 +140,19 @@ class MyWindow(QtWidgets.QMainWindow):
                 value_2 = demand - float(self.ui.tableWidget.item(j, 1).text())
 
                 #По условию загоняем в матрицу возганражении
-                if (value_1 > 0) and (value_2 <= 0):
-                    rang_matrix_inv[i,j] = 1
+                #Переходы из приемлемого состояния в неприемлемое
+                if (value_1 > 0) and (value_2 < 0):
+                    rang_matrix_3[i,j] = 1
+                else:
+                    rang_matrix_4[i,j] = 1
 
 
         #Ну тут просто по главной диагоняли проходим и пишем больше или меньше
         for i in range(states):
-            #Функция Хевисайда
-            rang_matrix[i,i] = (demand - float(self.ui.tableWidget.item(i, 1).text())) > 0
+            #Функция Хевисайда (Приемлемые состояния)
+            rang_matrix[i,i] = (demand - float(self.ui.tableWidget.item(i, 1).text())) >= 0
+            rang_matrix_2[i,i] = (demand - float(self.ui.tableWidget.item(i,1).text())) < 0
+
 
 
         #Собираем переходы из таблицы перехожлв
@@ -157,7 +167,7 @@ class MyWindow(QtWidgets.QMainWindow):
             transition_matrix[j, i] = mu
 
         #Инициализируем решатель и кидаем ему наши матрицы
-        core = calcCore(rang_matrix, rang_matrix_inv, transition_matrix)
+        core = calcCore(rang_matrix, rang_matrix_2, rang_matrix_3, rang_matrix_4, transition_matrix)
 
         #Достаём массивы значении при расчёте
         t, res, res2 = core.solve()
