@@ -152,7 +152,7 @@ class calcCore():
             timeL.append(time)
 
         #Выдаём результаты в main.py  дальше их в графики
-        return timeL, res, res2
+        return timeL, res, res2, res3, res4
 
 
 

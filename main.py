@@ -51,10 +51,11 @@ class MyWindow(QtWidgets.QMainWindow):
         header2.setStretchLastSection(True)
 
         #Обработка 3 событии: 3 кнопки
-        self.ui.AddButton.clicked.connect(self.add_line) #добавить состояние
+        #self.ui.AddButton.clicked.connect(self.add_line) #добавить состояние
         self.ui.CalcButton.clicked.connect(self.read_data) #Это препроцессинг о нём ниже
         self.ui.ExitButton.clicked.connect(self.close) #Нуу "Exit" looks Exciting
-
+        self.ui.Nazad.clicked.connect(self.draw1)
+        self.ui.Vpered.clicked.connect(self.draw2)
      #Тот самый load table который дёргался выше. Он грузит данные из csv файлов в ui
     def load_table(self):
         #Загнали эту таблицу как набор чисеел прямо из файла
@@ -105,9 +106,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
     #Добавление строки по кнопке
     #Алгортим тот же
-    def add_line(self):
-        current_row_count = self.ui.tableWidget.rowCount()
-        self.ui.tableWidget.insertRow(current_row_count)
+
 
     #Препроцессинг
     def read_data(self):
@@ -170,13 +169,30 @@ class MyWindow(QtWidgets.QMainWindow):
         core = calcCore(rang_matrix, rang_matrix_2, rang_matrix_3, rang_matrix_4, transition_matrix)
 
         #Достаём массивы значении при расчёте
-        t, res, res2 = core.solve()
+        self.t, self.res, self.res2, self.res3, self.res4 = core.solve()
         #Тут настройка пера для графика
         pen = pg.mkPen(color=(0, 0, 0), width=2)
 
         #Рисуем графики
-        self.ui.widget.plotItem.plot(t, res, pen=pen)
-        self.ui.widget_2.plotItem.plot(t, res2, pen=pen)
+        self.ui.widget.plotItem.plot(self.t, self.res, pen=pen)
+        self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
+
+
+    def draw1(self):
+
+        self.ui.widget.plotItem.clear()
+        pen = pg.mkPen(color=(0, 0, 0), width=2)
+
+        # Рисуем графики
+        self.ui.widget.plotItem.plot(self.t, self.res, pen=pen)
+        self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
+
+    def draw2(self):
+        pen = pg.mkPen(color=(0, 0, 0), width=2)
+
+        # Рисуем графики
+        self.ui.widget.plotItem.plot(self.t, self.res3, pen=pen)
+        self.ui.widget_2.plotItem.plot(self.t, self.res4, pen=pen)
 
 #А тут точка входа в программу
 app = QtWidgets.QApplication([])
