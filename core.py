@@ -33,7 +33,7 @@ class calcCore():
 
         return dV
 
-    # Система диф уравнении но уже для другой матрицы переходов
+    #Система диф уравнении но уже для другой матрицы переходов
     def equals2(self,  arg):
         r = self.rang_matrix_2
         a = self.transition_matrix
@@ -64,6 +64,20 @@ class calcCore():
             dV[i] = r[i][i] + A + B
         return dV
 
+    def equals4(self, arg):
+        r = self.rang_matrix_4
+        a = self.transition_matrix
+        dV = np.zeros(self.N)
+        for i in range(self.N):
+            A = 0
+            B = 0
+            for j in range(self.N):
+                if j != i:
+                    A += a[i][j] * r[i][j]
+                B += a[i][j] * arg[j]
+
+            dV[i] = r[i][i] + A + B
+        return dV
 
     #Интегратор
     def solve(self):
@@ -76,6 +90,8 @@ class calcCore():
         #Массивы результатов пока пустые
         res = list()
         res2 = list()
+        res3 = list()
+        res4 = list()
         timeL = list()
 
         #метод рунге кутты (о нём в википедии)
@@ -106,5 +122,37 @@ class calcCore():
             time += h
             res2.append(sum(V[2:-1]))
             timeL.append(time)
+
+        V = np.zeros(self.N)
+        time = 0
+        timeL.clear()
+        while time < 5:
+            k1 = self.equals(V)
+            k2 = self.equals2(V + k1 * h / 2)
+            k3 = self.equals2(V + k2 * h / 2)
+            k4 = self.equals2(V + k3 * h)
+
+            V += (k1 + 2 * k2 + 2 * k3 + k4) * h / 6
+            time += h
+            res3.append(sum(V[2:-1]))
+            timeL.append(time)
+
+        V = np.zeros(self.N)
+        time = 0
+        timeL.clear()
+        while time < 5:
+            k1 = self.equals(V)
+            k2 = self.equals2(V + k1 * h / 2)
+            k3 = self.equals2(V + k2 * h / 2)
+            k4 = self.equals2(V + k3 * h)
+
+            V += (k1 + 2 * k2 + 2 * k3 + k4) * h / 6
+            time += h
+            res4.append(sum(V[2:-1]))
+            timeL.append(time)
+
         #Выдаём результаты в main.py  дальше их в графики
         return timeL, res, res2
+
+
+
