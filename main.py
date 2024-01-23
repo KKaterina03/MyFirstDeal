@@ -132,18 +132,19 @@ class MyWindow(QtWidgets.QMainWindow):
         for i in range(states):
             for j in range(states):
                 # cj,bhftv gfhs gtht[jljd
-                i = int(self.ui.tableWidget.item(i, 0).text())
-                j = int(self.ui.tableWidget.item(j, 0).text())
+                n = int(self.ui.tableWidget.item(i, 0).text())
+                m = int(self.ui.tableWidget.item(j, 0).text())
                 #Оцениваем наградуд ля кажого перехода
-                value_1 = demand - float(self.ui.tableWidget.item(i, 1).text())
-                value_2 = demand - float(self.ui.tableWidget.item(j, 1).text())
+                value_1 = demand - float(self.ui.tableWidget.item(n, 1).text())
+                value_2 = demand - float(self.ui.tableWidget.item(m, 1).text())
 
                 #По условию загоняем в матрицу возганражении
                 #Переходы из приемлемого состояния в неприемлемое
                 if (value_1 > 0) and (value_2 < 0):
-                    rang_matrix_3[i,j] = 1
-                else:
-                    rang_matrix_4[i,j] = 1
+                    rang_matrix_3[n,m] = value_1
+                if (value_1 < 0) and (value_2 > 0):
+                    rang_matrix_4[n,m] = value_2
+
 
 
         #Ну тут просто по главной диагоняли проходим и пишем больше или меньше
@@ -153,6 +154,8 @@ class MyWindow(QtWidgets.QMainWindow):
             rang_matrix_2[i,i] = (demand - float(self.ui.tableWidget.item(i,1).text())) < 0
 
 
+
+        #print(rang_matrix_4)
 
         #Собираем переходы из таблицы перехожлв
         for n in range(t_count):
@@ -169,30 +172,44 @@ class MyWindow(QtWidgets.QMainWindow):
         core = calcCore(rang_matrix, rang_matrix_2, rang_matrix_3, rang_matrix_4, transition_matrix)
 
         #Достаём массивы значении при расчёте
-        self.t, self.res, self.res2, self.res3, self.res4 = core.solve()
+        self.t, self.res, self.res2, self.res3, self.res4, self.res11, self.res12, self.res13, self.res14 = core.solve()
+        print(self.res2[100])
+        print(self.res3[100])
+        print(self.res4[100])
         #Тут настройка пера для графика
-        pen = pg.mkPen(color=(0, 0, 0), width=2)
-
+        pen = pg.mkPen(color=(255, 102, 178), width=2)
+        pen2 = pg.mkPen(color = (102, 0, 102), width=2)
         #Рисуем графики
+        self.ui.widget.plotItem.clear()
+        self.ui.widget_2.plotItem.clear()
         self.ui.widget.plotItem.plot(self.t, self.res, pen=pen)
         self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
-
-
+        self.ui.widget.plotItem.plot(self.t, self.res11, pen=pen2)
+        self.ui.widget_2.plotItem.plot(self.t, self.res12, pen=pen2)
     def draw1(self):
 
+        pen = pg.mkPen(color=(255, 102, 178), width=2)
+        pen2 = pg.mkPen(color=(102, 0, 102), width=2)
         self.ui.widget.plotItem.clear()
-        pen = pg.mkPen(color=(0, 0, 0), width=2)
-
+        self.ui.widget_2.plotItem.clear()
         # Рисуем графики
         self.ui.widget.plotItem.plot(self.t, self.res, pen=pen)
         self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
+        self.ui.widget.plotItem.plot(self.t, self.res11, pen=pen2)
+        self.ui.widget_2.plotItem.plot(self.t, self.res12, pen=pen2)
 
     def draw2(self):
-        pen = pg.mkPen(color=(0, 0, 0), width=2)
-
+        pen = pg.mkPen(color=(255, 102, 178), width=2)
+        pen2 = pg.mkPen(color=(102, 0, 102), width=2)
+        self.ui.widget.plotItem.clear()
+        self.ui.widget_2.plotItem.clear()
         # Рисуем графики
         self.ui.widget.plotItem.plot(self.t, self.res3, pen=pen)
         self.ui.widget_2.plotItem.plot(self.t, self.res4, pen=pen)
+        self.ui.widget.plotItem.plot(self.t, self.res13, pen=pen2)
+        self.ui.widget_2.plotItem.plot(self.t, self.res14, pen=pen2)
+
+
 
 #А тут точка входа в программу
 app = QtWidgets.QApplication([])
