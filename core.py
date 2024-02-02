@@ -1,10 +1,10 @@
 import numpy as np
-#Итак, решатель всего этог
+#Итак, решатель всего этого
 
 class calcCore():
-    # Мы скормили ему матрицы в главном файле вот они тут выглядят как RM RMI TM
+    # Матрицы из главного файла, они выглядят как RM RMI TM
     def __init__(self, RM, RM2, RM3, RM4, TM):
-        #Они будут как атрибуты объектра (хранится внутри решателя проще говоря)
+        #Они будут как атрибуты объектра (храниться внутри решателя)
         self.rang_matrix = RM
         self.transition_matrix = TM
         self.rang_matrix_2 = RM2
@@ -12,17 +12,35 @@ class calcCore():
         self.rang_matrix_4 = RM4
 
 
-        #Размер нащих матриц а они все N*N | N = количество стостоянии
+        #Размер нащих матриц N*N | N = количество стостоянии
         self.N = len(RM)
-        #Суммируем стрки по главной диагоняли в матрице переходов
+        upper = np.triu(TM, 1)
+
+        print(upper)
+
+    #Создание матрицы с мю в виде функции
+    def gen_matrix(self, time):
+        lower_tri = np.tril(self.transition_matrix, -1) * (0.2*pow(time,0.2) )
+        upper_tri = np.triu(self.transition_matrix, 1)
+        pretransition_matrix = lower_tri + upper_tri
+        # Суммируем строки по главной диагоняли в матрице переходов
         for i in range(len(self.transition_matrix)):
-            self.transition_matrix[i,i] = -sum(self.transition_matrix[i])
+            pretransition_matrix[i, i] = -sum(pretransition_matrix[i])
+        return pretransition_matrix
+
+    # Создание матрицы с мю константой
+    def gen_matrix_const(self):
+        pretransition_matrix = self.transition_matrix
+        # Суммируем строки по главной диагонали в матрице переходов
+        for i in range(len(self.transition_matrix)):
+            pretransition_matrix[i, i] = -sum(pretransition_matrix[i])
+        return pretransition_matrix
 
 
-    #Система диф уравнении которые прописаны точь в точь как в статье
+    #Система диф уравнений
     def equals(self,  arg):
         r = self.rang_matrix
-        a = self.transition_matrix
+        a = self.gen_matrix_const()
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -36,11 +54,11 @@ class calcCore():
 
         return dV
 
-    #Система диф уравнении но уже для другой матрицы переходов
+    #Система диф уравнении для других матриц переходов
     def equals2(self,  arg):
         r = self.rang_matrix_2
 
-        a = self.transition_matrix
+        a = self.gen_matrix_const()
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -55,7 +73,7 @@ class calcCore():
 
     def equals3(self, arg):
         r = self.rang_matrix_3
-        a = self.transition_matrix
+        a = self.gen_matrix_const()
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -70,7 +88,7 @@ class calcCore():
 
     def equals4(self, arg):
         r = self.rang_matrix_4
-        a = self.transition_matrix
+        a = self.gen_matrix_const()
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -85,7 +103,7 @@ class calcCore():
 
     def equals11(self, t, arg):
         r = self.rang_matrix
-        a = self.transition_matrix * 1*pow(t,3)
+        a = self.gen_matrix(t)
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -101,7 +119,7 @@ class calcCore():
 
     def equals12(self, t, arg):
         r = self.rang_matrix_2
-        a = self.transition_matrix * 2*pow(t,3)
+        a = self.gen_matrix(t)
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -117,7 +135,7 @@ class calcCore():
 
     def equals13(self, t, arg):
         r = self.rang_matrix_3
-        a = self.transition_matrix * 3*pow(t,3)
+        a = self.gen_matrix(t)
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -134,7 +152,7 @@ class calcCore():
 
     def equals14(self, t, arg):
         r = self.rang_matrix_4
-        a = self.transition_matrix * 4*pow(t,3)
+        a = self.gen_matrix(t)
         dV = np.zeros(self.N)
         for i in range(self.N):
             A = 0
@@ -168,7 +186,7 @@ class calcCore():
         res14 = list()
         timeL = list()
 
-        #метод рунге кутты (о нём в википедии)
+        #метод Рунге Кутты
         while time < 5:
             k1 = self.equals(V)
             k2 = self.equals(V + k1 * h / 2)
@@ -178,7 +196,7 @@ class calcCore():
             V += (k1 + 2*k2 + 2*k3 + k4) * h / 6
 
             time += h
-            #Каждый щаг заполняем массив данных
+            #Каждый шаг заполняем массив данных
             res.append(np.mean(V))
             timeL.append(time)
 

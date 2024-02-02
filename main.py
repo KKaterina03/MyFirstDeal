@@ -16,7 +16,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
     #Контруктор класса
     def __init__(self):
-        # Фича с наследованием из парадигмы ООП
+        # Наследование из парадигмы ООП
         super(MyWindow,self).__init__()
         #ui - user inteface
         self.ui = Ui_MainWindow()
@@ -38,7 +38,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.tableWidget.verticalHeader().setVisible(False)
 
 
-        #Вот это всё настройки каддой колонки в кажодй таблице
+        #Вот это всё настройки каждой колонки в каждой таблице
         header = self.ui.tableWidget_2.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
@@ -66,7 +66,7 @@ class MyWindow(QtWidgets.QMainWindow):
         for line in data:
             #Количество строк в ui-таблице
             current_row_count = self.ui.tableWidget_2.rowCount()
-            #current_row_count - порядковый номер последнй строки
+            #current_row_count - порядковый номер последней строки
             #И под неё нужно вставить новую
             self.ui.tableWidget_2.insertRow(current_row_count)
 
@@ -91,7 +91,7 @@ class MyWindow(QtWidgets.QMainWindow):
         data = np.genfromtxt('data2.csv', delimiter=';')
         #Обнулили счётчик так как таблица новая
         l = 0
-        #Всё останое по той же логике
+        #Всё остальное по той же логике
         for line in data:
             current_row_count = self.ui.tableWidget.rowCount()
             self.ui.tableWidget.insertRow(current_row_count)
@@ -105,22 +105,22 @@ class MyWindow(QtWidgets.QMainWindow):
             l += 1
 
     #Добавление строки по кнопке
-    #Алгортим тот же
+    #Алгоритм тот же
 
 
     #Препроцессинг
     def read_data(self):
         # это спрос и мы его из текста переводим во float
         demand = float(self.ui.lineEdit.text())
-        #Количество сотоянии = количествустрок во 2 Таблице
+        #Количество сотоянии = количеству строк во 2 Таблице
         states = self.ui.tableWidget.rowCount()
         #Количество переходов
         t_count =   self.ui.tableWidget_2.rowCount()
         #Матрица вознаграждении (пока из нулей) размером states*states
         rang_matrix = np.zeros((states, states))
-        #аьрица переходов аналогично
+        #матрица переходов аналогично
         transition_matrix = np.zeros((states, states))
-        #Третья матрица вознагражении
+        #Третья матрица вознаграждении
         rang_matrix_3 = np.zeros((states, states))
         #Вторая матрица
         rang_matrix_2 = np.zeros((states,states))
@@ -128,17 +128,17 @@ class MyWindow(QtWidgets.QMainWindow):
         rang_matrix_4 = np.zeros((states, states))
 
 
-        #Таак тут пробегаемся по таблице и смотрим овзнаграждение за будущие переходы
+        #Пробегаемся по таблице и смотрим вознаграждение за будущие переходы
         for i in range(states):
             for j in range(states):
                 # cj,bhftv gfhs gtht[jljd
                 n = int(self.ui.tableWidget.item(i, 0).text())
                 m = int(self.ui.tableWidget.item(j, 0).text())
-                #Оцениваем наградуд ля кажого перехода
+                #Оцениваем награду для каждого перехода
                 value_1 = demand - float(self.ui.tableWidget.item(n, 1).text())
                 value_2 = demand - float(self.ui.tableWidget.item(m, 1).text())
 
-                #По условию загоняем в матрицу возганражении
+                #По условию загоняем в матрицу вознаграждений
                 #Переходы из приемлемого состояния в неприемлемое
                 if (value_1 > 0) and (value_2 < 0):
                     rang_matrix_3[n,m] = value_1
@@ -147,7 +147,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
 
 
-        #Ну тут просто по главной диагоняли проходим и пишем больше или меньше
+        #По главной диагоняли проходим и пишем больше или меньше
         for i in range(states):
             #Функция Хевисайда (Приемлемые состояния)
             rang_matrix[i,i] = (demand - float(self.ui.tableWidget.item(i, 1).text())) >= 0
@@ -157,14 +157,14 @@ class MyWindow(QtWidgets.QMainWindow):
 
         #print(rang_matrix_4)
 
-        #Собираем переходы из таблицы перехожлв
+        #Собираем переходы из таблицы переходов
         for n in range(t_count):
             i = int(self.ui.tableWidget_2.item(n, 0).text())
             j = int(self.ui.tableWidget_2.item(n, 1).text())
             lam = float(self.ui.tableWidget_2.item(n, 2).text())
             mu = float(self.ui.tableWidget_2.item(n, 3).text())
 
-            #Далее  вот таким хитрым образом раскидываем мю и лямбду
+            #Далее раскидываем мю и лямбду
             transition_matrix[i,j] = lam
             transition_matrix[j, i] = mu
 
@@ -186,6 +186,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
         self.ui.widget.plotItem.plot(self.t, self.res11, pen=pen2)
         self.ui.widget_2.plotItem.plot(self.t, self.res12, pen=pen2)
+        self.ui.label_7.setText('График 1 - График 1')
+        self.ui.label_8.setText('График 2 - График 2')
     def draw1(self):
 
         pen = pg.mkPen(color=(255, 102, 178), width=2)
@@ -195,9 +197,10 @@ class MyWindow(QtWidgets.QMainWindow):
         # Рисуем графики
         self.ui.widget.plotItem.plot(self.t, self.res, pen=pen)
         self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
-        self.ui.widget.plotItem.plot(self.t, self.res11, pen=pen2)
-        self.ui.widget_2.plotItem.plot(self.t, self.res12, pen=pen2)
-
+        self.ui.widget.plotItem.plot(self.t, self.res13, pen=pen2)
+        self.ui.widget_2.plotItem.plot(self.t, self.res14, pen=pen2)
+        self.ui.label_7.setText('График 1 - График 1')
+        self.ui.label_8.setText('График 2 - График 2')
     def draw2(self):
         pen = pg.mkPen(color=(255, 102, 178), width=2)
         pen2 = pg.mkPen(color=(102, 0, 102), width=2)
@@ -208,12 +211,13 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.widget_2.plotItem.plot(self.t, self.res4, pen=pen)
         self.ui.widget.plotItem.plot(self.t, self.res13, pen=pen2)
         self.ui.widget_2.plotItem.plot(self.t, self.res14, pen=pen2)
-
+        self.ui.label_7.setText('График 3 - График 3')
+        self.ui.label_8.setText('График 4 - График 4')
 
 
 #А тут точка входа в программу
 app = QtWidgets.QApplication([])
 application = MyWindow()
 application.show()
-#ну и выход из неё
+#и выход из неё
 sys.exit(app.exec())
