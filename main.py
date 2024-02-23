@@ -186,8 +186,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
         self.ui.widget.plotItem.plot(self.t, self.res11, pen=pen2)
         self.ui.widget_2.plotItem.plot(self.t, self.res12, pen=pen2)
-        self.ui.label_7.setText('График 1 - График 1')
-        self.ui.label_8.setText('График 2 - График 2')
+        self.ui.label_7.setText('График 1 - Доступность системы')
+        self.ui.label_8.setText('График 2 - Дефицит производительности')
     def draw1(self):
 
         pen = pg.mkPen(color=(255, 102, 178), width=2)
@@ -199,8 +199,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.widget_2.plotItem.plot(self.t, self.res2, pen=pen)
         self.ui.widget.plotItem.plot(self.t, self.res13, pen=pen2)
         self.ui.widget_2.plotItem.plot(self.t, self.res14, pen=pen2)
-        self.ui.label_7.setText('График 1 - График 1')
-        self.ui.label_8.setText('График 2 - График 2')
+        self.ui.label_7.setText('График 1 - Доступность системы')
+        self.ui.label_8.setText('График 2 - Дефицит производительности')
     def draw2(self):
         pen = pg.mkPen(color=(255, 102, 178), width=2)
         pen2 = pg.mkPen(color=(102, 0, 102), width=2)
@@ -211,8 +211,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.widget_2.plotItem.plot(self.t, self.res4, pen=pen)
         self.ui.widget.plotItem.plot(self.t, self.res13, pen=pen2)
         self.ui.widget_2.plotItem.plot(self.t, self.res14, pen=pen2)
-        self.ui.label_7.setText('График 3 - График 3')
-        self.ui.label_8.setText('График 4 - График 4')
+        self.ui.label_7.setText('График 3 - Среднее число отказов ПС')
+        self.ui.label_8.setText('График 4 - Функция надежности')
 
 
 #А тут точка входа в программу

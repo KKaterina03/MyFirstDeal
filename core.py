@@ -1,6 +1,10 @@
 import numpy as np
 #Итак, решатель всего этого
 
+delta = 1
+p0 = 1
+
+
 class calcCore():
     # Матрицы из главного файла, они выглядят как RM RMI TM
     def __init__(self, RM, RM2, RM3, RM4, TM):
@@ -20,7 +24,7 @@ class calcCore():
 
     #Создание матрицы с мю в виде функции
     def gen_matrix(self, time):
-        lower_tri = np.tril(self.transition_matrix, -1) * (0.2*pow(time,0.2) )
+        lower_tri = np.tril(self.transition_matrix, -1) * (p0*np.exp(delta*time))/(p0+(np.exp(delta*time)-1))
         upper_tri = np.triu(self.transition_matrix, 1)
         pretransition_matrix = lower_tri + upper_tri
         # Суммируем строки по главной диагоняли в матрице переходов
